@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->date('date');
             $table->string('name');
             $table->integer('price');
+            $table->unsignedInteger('stay_id');
         });
     }
 

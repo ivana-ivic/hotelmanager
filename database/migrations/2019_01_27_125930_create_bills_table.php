@@ -17,6 +17,7 @@ class CreateBillsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('amount');
+            $table->unsignedInteger('stay_id');
         });
     }
 

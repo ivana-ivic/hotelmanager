@@ -22,6 +22,8 @@ class CreateReservationsTable extends Migration
             $table->date('arrival_date');
             $table->date('departure_date');
             $table->date('valid_until');
+            $table->unsignedInteger('room_id');
+            $table->unsignedInteger('user_id');
         });
     }
 
