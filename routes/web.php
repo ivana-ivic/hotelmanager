@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('bills', 'BillController');
+Route::resource('guests', 'GuestController');
+Route::resource('reservations', 'ReservationController');
+Route::resource('rooms', 'RoomController');
+Route::resource('services', 'ServiceController');
+Route::resource('stays', 'StayController');
