@@ -8,9 +8,11 @@ $factory->define(App\Reservation::class, function (Faker $faker) {
     return [
         'status' => 'V',
         'date' => now(),
-        'description' => str_random(30),
+        'description' => $faker->text,
         'arrival_date' => $start,
         'departure_date' => $end,
         'valid_until' => $start,
+        'room_id' => 1,
+        'user_id' => 1,
     ];
 });

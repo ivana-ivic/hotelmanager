@@ -26,7 +26,9 @@ class UpdateServicesTable extends Migration
      */
     public function down()
     {
-        $table->date('date');
-        $table->unsignedInteger('stay_id');
+        Schema::table('services', function (Blueprint $table) {
+            $table->date('date');
+            $table->unsignedInteger('stay_id');
+        });
     }
 }
