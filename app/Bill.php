@@ -10,3 +10,4 @@ class Bill extends Model
     {
     	return $this->belongsTo(Stay::class);
     }
+}
