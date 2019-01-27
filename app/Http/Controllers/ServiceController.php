@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::all();
+
+        return view('services.index', compact('services'));
     }
 
     /**
@@ -24,7 +30,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('services.create');  
     }
 
     /**
@@ -35,7 +41,14 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attrs = request()->validate([
+            'name' => ['required'],
+            'price' => ['required']
+        ]);
+
+        Service::create($attrs);
+
+        return redirect('/services');
     }
 
     /**
@@ -46,7 +59,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('services.show', compact('service'));
     }
 
     /**

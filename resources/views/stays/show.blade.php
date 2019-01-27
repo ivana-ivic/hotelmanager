@@ -21,7 +21,7 @@
 			</div>
 			@endif
 			<div>
-				<form method="POST" action="/stays/{{$stay->id}}/services">
+				{{-- <form method="POST" action="/stays/{{$stay->id}}/services">
 					@csrf
 
 					<div class="box">
@@ -53,7 +53,7 @@
 							<button type="submit" class="button is-link">Kreiraj novu uslugu</button>
 						</div>
 					</div>
-				</form>
+				</form> --}}
 			</div>
 
         </div>
