@@ -13,7 +13,7 @@ class CreateStaysServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('stays_services', function (Blueprint $table) {
+        Schema::create('services_stays', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
             $table->unsignedInteger('quantity');
