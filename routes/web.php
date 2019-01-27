@@ -25,3 +25,5 @@ Route::resource('reservations', 'ReservationController');
 Route::resource('rooms', 'RoomController');
 Route::resource('services', 'ServiceController');
 Route::resource('stays', 'StayController');
+
+Route::post('/stays/{stay}/services', 'StayController@storeService');
