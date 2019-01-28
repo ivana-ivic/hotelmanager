@@ -21,39 +21,6 @@
 			</div>
 			@endif
 			<div>
-				{{-- <form method="POST" action="/stays/{{$stay->id}}/services">
-					@csrf
-
-					<div class="box">
-						<label class="label" for="date">Dan</label>
-
-						<div class="control">
-							<input type="text" class="input" name="date" placeholder="">
-						</div>
-					</div>
-
-					<div class="box">
-						<label class="label" for="name">Naziv usluge</label>
-
-						<div class="control">
-							<input type="text" class="input" name="name" placeholder="">
-						</div>
-					</div>
-
-					<div class="box">
-						<label class="label" for="price">Cena</label>
-
-						<div class="control">
-							<input type="text" class="input" name="price" placeholder="">
-						</div>
-					</div>
-
-					<div class="field">
-						<div class="control">
-							<button type="submit" class="button is-link">Kreiraj novu uslugu</button>
-						</div>
-					</div>
-				</form> --}}
 			</div>
 
         </div>

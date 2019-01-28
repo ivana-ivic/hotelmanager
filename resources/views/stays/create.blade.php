@@ -11,8 +11,19 @@
 				<form method="POST" action="/stays">
 					{{ csrf_field() }}
 					<div>
+						@if(!$guests->isEmpty())
+							<label for="guest">Gost:</label>
+							<select id="guest_select">
+								@foreach($guests as $guest)
+									<option value="{{$guest->id}}">{{ $guest->first_name }} {{ $guest->last_name }}</option>
+								@endforeach
+							</select>
+						@endif
+						<a href="/guests/create/0" class="button">Novi gost</a>
+					</div>
+					<div>
 						<label for="check_in_time">Vreme prijave:</label>
-						<input type="text" name="check_in_time" class="input" placeholder="Check-in time" value="">
+						<input type="text" name="check_in_time" class="input" placeholder="Vreme prijave" value="">
 					</div>
 					<div>
 						<label for="memo">Memo:</label>
