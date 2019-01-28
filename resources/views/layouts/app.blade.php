@@ -34,6 +34,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('stays.index') }}">Boravci</a>
+                                </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('reservations.index') }}">Rezervacije</a>
                         </li>
                         <li class="nav-item">
