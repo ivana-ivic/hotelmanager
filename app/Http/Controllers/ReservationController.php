@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::all();
+        return view('reservations.index')->with('reservations', $reservations);
     }
 
     /**
@@ -46,7 +51,8 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+        $reservation = Reservation::find($reservation->id);
+        return view('reservations.show')->with('reservation', $reservation);
     }
 
     /**
