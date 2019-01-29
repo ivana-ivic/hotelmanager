@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,9 @@ class BillController extends Controller
      */
     public function index()
     {
-        //
+        $bills = Bill::all();
+
+        return view('bills.index', compact('bills'));
     }
 
     /**
@@ -24,7 +30,7 @@ class BillController extends Controller
      */
     public function create()
     {
-        //
+        return back();
     }
 
     /**
@@ -35,7 +41,14 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attrs = request()->validate([
+            'stay_id' => ['required'],
+            'amount' => ['required']
+        ]);
+
+        Bill::create($attrs);
+
+        return redirect('/bills');
     }
 
     /**
@@ -46,7 +59,7 @@ class BillController extends Controller
      */
     public function show(Bill $bill)
     {
-        //
+        return view('bills.show', compact('bill'));
     }
 
     /**

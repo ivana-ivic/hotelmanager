@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,9 @@ class GuestController extends Controller
      */
     public function index()
     {
-        //
+        $guests = Guest::all();
+
+        return view('guests.index', compact('guests'));
     }
 
     /**
@@ -22,9 +28,9 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($stay = null)
     {
-        //
+        return view('guests.create', compact('stay'));  
     }
 
     /**
@@ -35,7 +41,32 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attrs = request()->validate([
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'date_of_birth' => ['required', 'date_format:Y-m-d'],
+            'identification_doc' => ['required', 'string']
+        ]);
+        $stay = -1;
+        if (request()->has('stay'))
+        {
+            $stay = request()->stay;
+        }
+        Guest::create($attrs);
+
+        if ($stay > 0)
+        {
+            return redirect('/stays/$stay/edit');
+        }
+        elseif ($stay == 0) 
+        {
+            return redirect('/stays/create');
+        }
+        else
+        {
+            return redirect('/guests');
+        }
     }
 
     /**
@@ -46,7 +77,7 @@ class GuestController extends Controller
      */
     public function show(Guest $guest)
     {
-        //
+        return view('guests.show', compact('guest'));
     }
 
     /**

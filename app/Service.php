@@ -8,8 +8,8 @@ class Service extends Model
 {
 	public $guarded = [];
 	
-    public function stay()
+    public function stays()
     {
-    	return $this->belongsTo(Stay::class);
+    	return $this->belongsToMany(Stay::class)->withPivot('date', 'quantity');
     }
 }

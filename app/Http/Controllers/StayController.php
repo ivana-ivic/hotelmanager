@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Stay;
+use App\Service;
+use App\Guest;
 use Illuminate\Http\Request;
 
 class StayController extends Controller
@@ -32,7 +34,9 @@ class StayController extends Controller
      */
     public function create()
     {
-        return view('stays.create');    
+        $services = Service::all();
+        $guests = Guest::all();
+        return view('stays.create', compact('services', 'guests'));    
     }
 
     /**

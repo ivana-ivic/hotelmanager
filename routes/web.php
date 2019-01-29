@@ -27,3 +27,4 @@ Route::resource('services', 'ServiceController');
 Route::resource('stays', 'StayController');
 
 Route::post('/stays/{stay}/services', 'StayController@storeService');
+Route::get('/guests/create/{stay}', 'GuestController@create');

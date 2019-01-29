@@ -26,11 +26,15 @@ class Stay extends Model
 
     public function services()
     {
-    	return $this->hasMany(Service::class);
+    	return $this->belongsToMany(Service::class)->withPivot('date', 'quantity');
     }
 
-    public function addService($service)
+    public function addServices($services)
     {
-        $this->services()->create($service);
+        // ovo ne valja, treba da se proslede i podaci iz pivota
+        foreach($services as $service)
+        {
+            $this->services()->attach($service, ['date' => $date, 'quantity' => $quantity]);
+        }
     }
 }
