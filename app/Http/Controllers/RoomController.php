@@ -70,7 +70,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        return view('rooms.edit');
+        return view('rooms.edit')->with('room', $room);
     }
 
     /**
@@ -82,7 +82,13 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        //
+        $room->number = $request->number;
+        $room->type = $request->type;
+        $room->description = $request->description;
+        $room->active = $request->active ? true : false;
+        $room->save();
+
+        return $this->show($room);
     }
 
     /**

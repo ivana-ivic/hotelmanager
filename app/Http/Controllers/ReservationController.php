@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Reservation;
+use App\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -29,7 +31,9 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        return view('reservations.create');
+        //ovde treba da se nadju sve trenutno slobodne sobe, a ne sve sobe (mada moze i posle da se proverava da li je soba slobodna u odabranom periodu)
+        $rooms=Room::all();
+        return view('reservations.create')->with('rooms', $rooms);
     }
 
     /**
@@ -40,7 +44,23 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservation = new Reservation;
+        $reservation->created_at = now();
+        $reservation->updated_at = now();
+        $reservation->status = 'V';
+        $reservation->date = today();
+        $reservation->description = $request->description;
+        $reservation->arrival_date = $request->arrival_date;
+        $reservation->departure_date = $request->departure_date;
+        $reservation->valid_until = $request->valid_until;
+        $reservation->room_id = $request->room;
+
+        $user_id = Auth::id();
+        $reservation->user_id = $user_id;
+
+        $reservation->save();
+
+        return $this->index();
     }
 
     /**
@@ -63,7 +83,8 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        return view('reservations.edit');
+        $rooms=Room::all();
+        return view('reservations.edit', ['reservation' => $reservation, 'rooms' => $rooms]);
     }
 
     /**
@@ -75,7 +96,20 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+        $reservation->updated_at = now();
+        $reservation->status = $request->status;
+        $reservation->description = $request->description;
+        $reservation->arrival_date = $request->arrival_date;
+        $reservation->departure_date = $request->departure_date;
+        $reservation->valid_until = $request->valid_until;
+        $reservation->room_id = $request->room;
+
+        $user_id = Auth::id();
+        $reservation->user_id = $user_id;
+
+        $reservation->save();
+
+        return $this->show($reservation);
     }
 
     /**
@@ -86,6 +120,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        Reservation::destroy($reservation->id);
+        return $this->index();
     }
 }
