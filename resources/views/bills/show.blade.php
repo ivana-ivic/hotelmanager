@@ -8,7 +8,7 @@
 
 			<div>
 				Boravak:
-				{{ $bill->stay()->name }}
+				{{ $bill->stay->check_in_time }} {{ $bill->stay->memo }}
 			</div>
 			<div>
 				Ukupno:

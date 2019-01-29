@@ -50,10 +50,15 @@ class StayController extends Controller
         //dd(request()->all());
         $attrs = request()->validate([
             'check_in_time' => ['required', 'date_format:Y-m-d'],
-            'description' => ['string|nullable']
+            'memo' => ['string']
         ]);
 
-        Stay::create($attrs);
+        $stay = Stay::create($attrs);
+        $services = request('services');
+        if (isset($services))
+        {
+            $stay->addServices($services);   
+        }
 
         return redirect('/stays');
     }
@@ -115,6 +120,20 @@ class StayController extends Controller
         //  'project_id' => $project->id,
         //  'description' => request('description')
         // ]);
+        return back();
+    }
+
+    public function storeBill(Stay $stay)
+    {
+        $total = 0;
+        // dd($stay->services);
+        foreach ($stay->services as $service)
+        {
+            //dd($service);
+            $total += $service->price + $service->pivot->quantity;       
+        }
+        $bill = ['amount' => $total];
+        $stay->addBill($bill);
         return back();
     }
 }
