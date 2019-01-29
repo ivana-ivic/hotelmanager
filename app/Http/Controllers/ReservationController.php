@@ -29,7 +29,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('reservations.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        return view('reservations.edit');
     }
 
     /**

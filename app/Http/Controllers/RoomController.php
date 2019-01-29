@@ -29,7 +29,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('rooms.create');
     }
 
     /**
@@ -40,7 +40,14 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $room = new Room;
+        $room->number = $request->number;
+        $room->type = $request->type;
+        $room->description = $request->description;
+        $room->active = $request->active ? true : false;
+        $room->save();
+
+        return $this->index();
     }
 
     /**
@@ -63,7 +70,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        return view('rooms.edit');
     }
 
     /**
@@ -86,6 +93,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        Room::destroy($room->id);
+        return $this->index();
     }
 }
