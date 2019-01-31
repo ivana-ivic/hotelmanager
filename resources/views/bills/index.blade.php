@@ -10,7 +10,7 @@
 			@foreach ($bills as $bill)
 				<li>
 					<a href="/bills/{{ $bill->id }}">
-						{{ $bill->stay()->name }} : {{ $bill->amount }}
+						{{ $bill->stay->check_in_time }} {{ $bill->stay->memo }} : {{ $bill->amount }}
 					</a>
 				</li>
 			@endforeach

@@ -31,10 +31,18 @@ class Stay extends Model
 
     public function addServices($services)
     {
-        // ovo ne valja, treba da se proslede i podaci iz pivota
-        foreach($services as $service)
+        $services = request('services');
+        foreach ($services as $service)
         {
-            $this->services()->attach($service, ['date' => $date, 'quantity' => $quantity]);
+            $parts = explode(' ', $service);
+            $id = (int)$parts[0];
+            $service = Service::where('id', $id)->get();
+            $this->services()->attach($service, ['date' => $this->check_in_time, 'quantity' => $parts[1]]);
         }
+    }
+
+    public function addBill($bill)
+    {
+        $this->bill()->create($bill);
     }
 }
