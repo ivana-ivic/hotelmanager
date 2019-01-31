@@ -13,7 +13,7 @@
                         <div class="panel-body">
                             <table class="table table-bordered">
                             <tbody>
-                                <tr><th>Broj sobe</th><th>Tip</th><th>Opis</th></tr>
+                                <tr><th>Broj sobe</th><th>Kapacitet</th><th>Opis</th></tr>
                                 @for($i = 0; $i < count($rooms); $i++)
                                 
                                     <tr><td><a href="{{ URL::route('rooms.show', $rooms[$i]->id) }}">{{ $rooms[$i]->number }}</a></td>
