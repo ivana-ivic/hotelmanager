@@ -18,7 +18,13 @@
 											<tr>
 												<td><a href="/stays/{{ $stay->id }}">{{ $stay->id }}</a></td>
 												<td>{{ $stay->check_in_time }}</td>
-												<td>{{ $stay->check_out_time }}</td>
+												<td>
+													@if($stay->check_out_time == '0000-00-00 00:00:00')
+													-
+													@else
+													{{ $stay->check_out_time }}
+													@endif
+												</td>
 											</tr>
 										@endforeach
 									</tbody>

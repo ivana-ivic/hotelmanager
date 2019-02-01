@@ -93,6 +93,7 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        //
+        Bill::destroy($bill->id);
+        return $this->index();
     }
 }

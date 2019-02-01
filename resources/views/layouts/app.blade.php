@@ -41,6 +41,9 @@
                             <a class="nav-link" href="{{ route('reservations.index') }}">Rezervacije</a>
                         </li>
                         <li class="nav-item">
+                                <a class="nav-link" href="{{ route('bills.index') }}">Računi</a>
+                            </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('rooms.index') }}">Sobe</a>
                         </li>
                     </ul>

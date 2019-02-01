@@ -136,4 +136,11 @@ class StayController extends Controller
         $stay->addBill($bill);
         return back();
     }
+
+    public function checkOut(Stay $stay)
+    {
+        $stay->check_out_time = now();
+        $stay->save();
+        return $this->show($stay);
+    }
 }
