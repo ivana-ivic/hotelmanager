@@ -9,5 +9,6 @@ $factory->define(App\Guest::class, function (Faker $faker) {
         'date_of_birth' => $faker->date,
         'country' => $faker->country,
         'identification_doc' => $faker->isbn10,
+        'email' => '39supilif@gmail.com'
     ];
 });

@@ -45,6 +45,9 @@
 								<div class="form-control">
 									<h4>Ukupan iznos: {{ $bill->amount }}</h4>
 								</div>
+								<div>
+									<a href="{{ route('bills.email', $bill) }}">Prosledi korisniku</a>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -95,5 +97,15 @@ class BillController extends Controller
     {
         Bill::destroy($bill->id);
         return $this->index();
+    }
+
+
+
+    public function email(Bill $bill)
+    {
+        $guestmail = $bill->stay->guest->email;
+        Mail::to($guestmail)->send(new SendMail($bill));
+
+        return back();
     }
 }
