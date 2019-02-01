@@ -21,7 +21,7 @@
                               <tr><th>Broj</th><td>{{ $room->number }}</td></tr>
                               <tr><th>Kapacitet</th><td>{{ $room->type }}</td></tr>
                               <tr><th>Opis</th><td>{{ $room->description }}</td></tr>
-                              <tr><th>Aktivna</th><td>{{ $room->active }}</td></tr>
+                              <tr><th>Aktivna</th><td>@if($room->active) Da @else Ne @endif</td></tr>
                             </tbody>
                           </table>
                     </div>

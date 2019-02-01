@@ -35,8 +35,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="active" class="col-md-4 control-label">{{ __('Aktivna?') }}</label>
+                        <div class="form-group">
+                            <label for="active" class="col-md-4 control-label">Aktivna?</label>
 
                             <div class="col-md-6">
                                 <input id="active" type="checkbox" class="form-control" name="active">

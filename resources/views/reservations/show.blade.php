@@ -23,7 +23,7 @@
                               <tr><th>Napomena</th><td>{{ $reservation->description }}</td></tr>
                               <tr><th>Rezervaciju napravio</th><td>{{ $reservation->user->name }}</td></tr>
                               <tr><th>Važi do</th><td>{{ $reservation->valid_until }}</td></tr>
-                              <tr><th>Status</th><td>@if($reservation->status == 'V') Validna @else Otkazana @endif</td></tr>
+                              <tr><th>Status</th><td @if($reservation->status == 'V') style="color:#309e2a" @else style="color:#e01818" @endif>@if($reservation->status == 'V') Validna @else Otkazana @endif</td></tr>
                             </tbody>
                           </table>
                     </div>

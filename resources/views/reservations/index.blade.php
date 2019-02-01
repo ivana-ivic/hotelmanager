@@ -11,13 +11,22 @@
                 <div class="card-body">
                     @if(count($reservations) > 0)
                         <div class="panel-body">
-                            <table class="table table-bordered">
+                            <table class="table">
                             <tbody>
-                                <tr><th>Broj rezervacije</th><th>Status</th><th>Dolazak</th></tr>
+                                <tr><th>Broj rezervacije</th><th>Soba</th><th>Dolazak</th><th>Status</th><th></th></tr>
                                 @for($i = 0; $i < count($reservations); $i++)
-                                    <tr><td><a href="{{ URL::route('reservations.show', $reservations[$i]->id) }}">{{ $reservations[$i]->id }}</a></td>
-                                        <td>{{ $reservations[$i]->status }}</td>
+                                    <tr @if($reservations[$i]->status == 'V') style="background-color:#8cff8e" @else style="background-color:#ff7a7a" @endif>
+                                        <td><a href="{{ URL::route('reservations.show', $reservations[$i]) }}">{{ $reservations[$i]->id }}</a></td>
+                                        <td>{{ $reservations[$i]->room->number }}</td>
                                         <td>{{ $reservations[$i]->arrival_date }}</td>
+                                        <td>@if($reservations[$i]->status == 'V') Validna @else Otkazana @endif</td>
+                                        <td>
+                                            <form action="{{ route('reservations.destroy', $reservations[$i]) }}" method="POST" style="float:center;">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="image" style="float:center; width:26px;height:26px;" src="{{ asset('img/ic_delete_forever_black_18dp_2x.png') }}" alt="Delete" />
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endfor
                             </tbody>

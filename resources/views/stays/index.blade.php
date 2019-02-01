@@ -5,17 +5,27 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Stays</h1>
-			<ul>
-			@foreach ($stays as $stay)
-				<li>
-					<a href="/stays/{{ $stay->id }}">
-						{{ $stay->check_in_time }}
-					</a>
-					{{ $stay->memo }}
-				</li>
-			@endforeach
-			</ul>
+				<div class="card">
+						<div class="card-header">Boravci 
+							<a href="{{ URL::route('stays.create') }}" style="float:right;" title="Novi boravak"><img style="width:26px;height:26px;" src="{{ asset('img/ic_add_circle_black_18dp_2x.png') }}" alt="Novi boravak" /></a>
+						</div>
+						<div class="card-body">
+								<div class="panel-body">
+									<table class="table table-bordered">
+									<tbody>
+										<tr><th>Broj</th><th>Vreme prijave</th><th>Vreme odjave</th></tr>
+										@foreach ($stays as $stay)
+											<tr>
+												<td><a href="/stays/{{ $stay->id }}">{{ $stay->id }}</a></td>
+												<td>{{ $stay->check_in_time }}</td>
+												<td>{{ $stay->check_out_time }}</td>
+											</tr>
+										@endforeach
+									</tbody>
+									</table>
+								</div>
+						</div>
+					</div>
         </div>
     </div>
 </div>
