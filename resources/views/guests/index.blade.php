@@ -16,6 +16,7 @@
 										<tr><td><a href="{{ URL::route('guests.edit', $guest) }}" style="float:left;" title="Izmeni gosta">{{ $guest->first_name }} {{ $guest->last_name }}</a></td>
 									  	<td>{{ $guest->date_of_birth }}</td>
 									  	<td>{{ $guest->country }}</td>
+									  	<td>{{ $guest->email }}</td>
 										<td>{{ $guest->identification_doc }}</td>
 										<td>
 											<form action="{{ route('guests.destroy', $guest) }}" method="POST" style="float:left;">

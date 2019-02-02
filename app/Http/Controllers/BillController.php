@@ -104,7 +104,8 @@ class BillController extends Controller
     public function email(Bill $bill)
     {
         $guestmail = $bill->stay->guest->email;
-        Mail::to($guestmail)->send(new SendMail($bill));
+        $subject = 'Hotel bill';
+        Mail::to($guestmail)->send(new SendMail($bill, $subject));
 
         return back();
     }

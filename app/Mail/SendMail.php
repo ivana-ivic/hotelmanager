@@ -15,15 +15,17 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $bill;
+    public $subject;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($bill)
+    public function __construct($bill, $subject)
     {
         $this->bill = $bill;
+        $this->subject = $subject;
     }
 
     /**
