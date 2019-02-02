@@ -13,10 +13,11 @@
 								<div class="panel-body">
 									<table class="table table-bordered">
 									<tbody>
-										<tr><th>Broj</th><th>Vreme prijave</th><th>Vreme odjave</th></tr>
+										<tr><th>Broj</th><th>Soba</th><th>Vreme prijave</th><th>Vreme odjave</th></tr>
 										@foreach ($stays as $stay)
 											<tr>
 												<td><a href="/stays/{{ $stay->id }}">{{ $stay->id }}</a></td>
+												<td>{{ $stay->room->number }}</td>
 												<td>{{ $stay->check_in_time }}</td>
 												<td>
 													@if($stay->check_out_time == '0000-00-00 00:00:00')

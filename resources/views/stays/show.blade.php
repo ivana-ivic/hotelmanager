@@ -18,7 +18,7 @@
 				</div>
                 <div class="card-body">
                     <div class="panel-body">
-                        <table class="table table-bordered">
+                        <table class="table">
                             <tbody>
                               <tr><th>Vreme prijave</th><td>{{ $stay->check_in_time }}</td></tr>
                               <tr><th>Vreme odjave</th><td>
@@ -33,36 +33,53 @@
 								  @endif
 								</td>
 							   </tr>
-                              <tr><th>Soba</th><td>{{ $stay->reservation->room->number }}</td></tr>
-                              <tr><th>Reservacija</th><td><a href="{{ route('reservations.show', $stay->reservation ) }}" title="Rezervacija">{{ $stay->reservation->id }}</a></td></tr>
-                              <tr><th>Napomena</th><td>{{ $stay->memo }}</td></tr>
+                              <tr><th>Soba</th><td>{{ $stay->room->number }}</td></tr>
+							  <tr><th>Reservacija</th>
+								<td>
+									@if($stay->reservation)
+									<a href="{{ route('reservations.show', $stay->reservation ) }}" title="Rezervacija">{{ $stay->reservation->id }}</a>
+									@else
+									-
+									@endif
+								</td>
+							  </tr>
+							  <tr><th>Napomena</th><td>{{ $stay->memo }}</td></tr>
+							  <tr>
+								<th>Podaci o gostu</th>
+								<td>
+									<h6>Ime i prezime: </h6><p>{{ $stay->guest->first_name }} {{ $stay->guest->last_name }}</p>
+									<h6>Datum rođenja: </h6><p>{{ $stay->guest->date_of_birth }}</p>
+									<h6>Zemlja: </h6><p>{{ $stay->guest->country }}</p>
+									<h6>Broj dokumenta: </h6><p>{{ $stay->guest->identification_doc }}</p>
+								</td>
+							</tr>
+							<tr>
+							<th>Uključene usluge</th>
+							<td>
+								@if ($stay->services->count())
+									<table class="table">
+										<tbody>
+											<tr><th>Usluga</th><th>Cena</th><th>Količina</th><th>Datum</th></tr>
+											@foreach ($stay->services as $service)
+											<td>{{ $service->name }}</td>
+											<td>{{ $service->price }}</td>
+											<td>{{ $service->pivot->quantity }}</td>
+											<td>{{ $service->pivot->date }}</td></tr>
+											@endforeach
+										</tbody>
+									</table>
+								@else
+								<p style="color:#a0a0a0; font-style: italic;">Nema usluga</p>
+								@endif
+								</td>
+							</tr>
                             </tbody>
 						  </table>
-						  
-						<div>
-							<h4>Uključene usluge:</h4>
-						</div>
-						@if ($stay->services->count())
-							<table class="table">
-								<tbody>
-									@foreach ($stay->services as $service)
-									<tr><th>Usluga</th><td>{{ $service->pivot->date }}</td></tr>
-									<tr><th>Cena</th><td>{{ $service->name }}</td></tr>
-									<tr><th>Količina</th><td>{{ $service->pivot->quantity }}</td></tr>
-									<tr><th>Datum</th><td>{{ $service->price }}</td></tr>
-									@endforeach
-								</tbody>
-							</table>
+						@if (!isset($stay->bill))
+						<a href='/stays/{{$stay->id}}/bills'>Kreiraj račun</a>
 						@else
-						<p style="color:#a0a0a0; font-style: italic;">Nema usluga</p>
+						<a href='/bills/{{$stay->bill->id}}'>Prikaži račun</a>
 						@endif
-						<div>
-							@if (!isset($stay->bill))
-								<a href='/stays/{{$stay->id}}/bills'>Kreiraj račun</a>
-							@else
-								<a href='/bills/{{$stay->bill->id}}'>Prikaži račun</a>
-							@endif
-						</div>
                     </div>
                 </div>
             </div>

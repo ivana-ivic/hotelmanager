@@ -46,6 +46,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('rooms.index') }}">Sobe</a>
                         </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="{{ route('services.index') }}">Usluge</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="{{ route('guests.index') }}">Gosti</a>
+                        </li>
                     </ul>
                     @endif
 

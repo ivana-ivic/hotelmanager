@@ -88,7 +88,7 @@ class GuestController extends Controller
      */
     public function edit(Guest $guest)
     {
-        //
+        return view('guests.edit', compact('guest'));
     }
 
     /**
@@ -100,7 +100,14 @@ class GuestController extends Controller
      */
     public function update(Request $request, Guest $guest)
     {
-        //
+        $guest->first_name = $request->first_name;
+        $guest->last_name = $request->last_name;
+        $guest->date_of_birth = $request->date_of_birth;
+        $guest->country = $request->country;
+        $guest->identification_doc = $request->identification_doc;
+        $guest->save();
+
+        return $this->index();
     }
 
     /**
@@ -111,6 +118,7 @@ class GuestController extends Controller
      */
     public function destroy(Guest $guest)
     {
-        //
+        Guest::destroy($guest->id);
+        return $this->index();
     }
 }

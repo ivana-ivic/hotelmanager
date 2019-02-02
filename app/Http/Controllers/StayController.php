@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Stay;
 use App\Service;
 use App\Guest;
+use App\Room;
 use Illuminate\Http\Request;
 
 class StayController extends Controller
@@ -36,7 +37,8 @@ class StayController extends Controller
     {
         $services = Service::all();
         $guests = Guest::all();
-        return view('stays.create', compact('services', 'guests'));    
+        $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
+        return view('stays.create', compact('services', 'guests', 'rooms'));    
     }
 
     /**
@@ -49,11 +51,15 @@ class StayController extends Controller
     {
         //dd(request()->all());
         $attrs = request()->validate([
-            'check_in_time' => ['required', 'date_format:Y-m-d'],
+            'check_in_time' => ['date_format:Y-m-d'],
             'memo' => ['string']
         ]);
 
         $stay = Stay::create($attrs);
+        $stay->check_in_time = now();
+        $stay->room_id = $request->room;
+        $stay->guest_id = $request->guest;
+        $stay->save();
         $services = request('services');
         if (isset($services))
         {
