@@ -18,6 +18,7 @@ class RoomsTableSeeder extends Seeder
             'active' => true,
             'created_at' => now(),
             'updated_at' => now(),
+            'price' => 1500,
         ]);
 
         DB::table('rooms')->insert([
@@ -27,6 +28,7 @@ class RoomsTableSeeder extends Seeder
             'active' => true,
             'created_at' => now(),
             'updated_at' => now(),
+            'price' => 2500,
         ]);
 
         DB::table('rooms')->insert([
@@ -36,6 +38,7 @@ class RoomsTableSeeder extends Seeder
             'active' => true,
             'created_at' => now(),
             'updated_at' => now(),
+            'price' => 3500,
         ]);
 
         DB::table('rooms')->insert([
@@ -45,6 +48,7 @@ class RoomsTableSeeder extends Seeder
             'active' => true,
             'created_at' => now(),
             'updated_at' => now(),
+            'price' => 4500,
         ]);
     }
 }

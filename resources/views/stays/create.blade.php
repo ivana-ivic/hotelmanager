@@ -15,6 +15,7 @@
 								<label for="guest" class="col-md-4 control-label">Gost</label>
 	
 								<div class="col-md-6">
+										<a href="/guests/create/0" class="button"><img style="width:26px;height:26px;" src="{{ asset('img/ic_person_add_black_18dp_2x.png') }}" alt="Dodaj gosta" /></a>
 									<select id="guest" class="form-control" name="guest" value="{{ old('guest') }}" required>
 										@if(count($guests) > 0)
 											@for($i = 0; $i < count($guests); $i++)
@@ -61,7 +62,7 @@
 									<option value="{{$service->id}}">{{ $service->name }} - {{ $service->price }}</option>
                                     @endforeach
 								</select>	
-								<input type="button" value="Dodaj u listu" onclick="addToList()">
+								<input type="button" value="Dodaj u listu" class="form-control" onclick="addToList()">
                             </div>
 						</div>
 						@endif

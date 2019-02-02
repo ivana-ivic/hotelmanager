@@ -30,4 +30,4 @@ Route::post('/stays/{stay}/services', 'StayController@storeService');
 Route::get('/stays/{stay}/bills', 'StayController@storeBill');
 Route::get('/guests/create/{stay}', 'GuestController@create');
 
-Route::put('/stays/{stay}', 'StayController@checkOut')->name('stays.checkout');
+Route::put('/stays/{stay}/checkout', 'StayController@checkOut')->name('stays.checkout');
