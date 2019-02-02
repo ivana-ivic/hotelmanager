@@ -20,8 +20,9 @@
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <tbody>
-                              <tr><th>Vreme prijave</th><td>{{ $stay->check_in_time }}</td></tr>
-                              <tr><th>Vreme odjave</th><td>
+                            	<tr><th>Gost</th><td><a href="{{ route('guests.show', $stay->guest) }}">{{ $stay->guest->first_name }} {{ $stay->guest->last_name }}</a></td></tr>
+								<tr><th>Vreme prijave</th><td>{{ $stay->check_in_time }}</td></tr>
+								<tr><th>Vreme odjave</th><td>
 								  @if($stay->check_out_time == '0000-00-00 00:00:00')
 								  <form action="{{ route('stays.checkout', $stay) }}" method="POST">
 										@method('PUT')
@@ -32,10 +33,10 @@
 								  {{ $stay->check_out_time }}
 								  @endif
 								</td>
-							   </tr>
-                              <tr><th>Soba</th><td>{{ $stay->reservation->room->number }}</td></tr>
-                              <tr><th>Reservacija</th><td><a href="{{ route('reservations.show', $stay->reservation ) }}" title="Rezervacija">{{ $stay->reservation->id }}</a></td></tr>
-                              <tr><th>Napomena</th><td>{{ $stay->memo }}</td></tr>
+								</tr>
+								<tr><th>Soba</th><td>{{ $stay->reservation->room->number }}</td></tr>
+								<tr><th>Reservacija</th><td><a href="{{ route('reservations.show', $stay->reservation ) }}" title="Rezervacija">{{ $stay->reservation->id }}</a></td></tr>
+								<tr><th>Napomena</th><td>{{ $stay->memo }}</td></tr>
                             </tbody>
 						  </table>
 						  

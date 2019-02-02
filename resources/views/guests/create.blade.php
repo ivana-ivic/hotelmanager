@@ -30,6 +30,10 @@
 						<label for="identification_doc">Identifikacija:</label>
 						<input type="text" name="identification_doc" class="input" placeholder="Identifikacija" value="">
 					</div>
+					<div>
+						<label for="email">E-mail:</label>
+						<input type="text" name="email" class="input" placeholder="E-mail" value="">
+					</div>
 					@if (isset($stay))
 						<input type="hidden" id="stay" name="stay" value="{{ $stay }}">
 					@endif

@@ -26,6 +26,10 @@
 				Identifikacija:
 				{{ $guest->identification_doc }}
 			</div>
+			<div>
+				E-mail:
+				{{ $guest->email }}
+			</div>
         </div>
     </div>
 </div>
