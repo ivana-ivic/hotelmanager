@@ -43,6 +43,7 @@ class RoomController extends Controller
         $room = new Room;
         $room->number = $request->number;
         $room->type = $request->type;
+        $room->price = $request->price;
         $room->description = $request->description;
         $room->active = $request->active ? true : false;
         $room->save();
@@ -84,6 +85,7 @@ class RoomController extends Controller
     {
         $room->number = $request->number;
         $room->type = $request->type;
+        $room->price = $request->price;
         $room->description = $request->description;
         $room->active = $request->active ? true : false;
         $room->save();

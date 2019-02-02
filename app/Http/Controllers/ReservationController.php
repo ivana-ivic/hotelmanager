@@ -31,8 +31,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //ovde treba da se nadju sve trenutno slobodne sobe, a ne sve sobe (mada moze i posle da se proverava da li je soba slobodna u odabranom periodu)
-        $rooms=Room::all();
+        $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
         return view('reservations.create')->with('rooms', $rooms);
     }
 
@@ -44,6 +43,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        //OVDE IDE PROVERA DA LI JE SOBA SLOBODNA
         $reservation = new Reservation;
         $reservation->created_at = now();
         $reservation->updated_at = now();
@@ -83,7 +83,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        $rooms=Room::all();
+        $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
         return view('reservations.edit', ['reservation' => $reservation, 'rooms' => $rooms]);
     }
 
@@ -96,6 +96,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
+        //OVDE IDE PROVERA DA LI JE SOBA SLOBODNA
         $reservation->updated_at = now();
         $reservation->status = $request->status;
         $reservation->description = $request->description;

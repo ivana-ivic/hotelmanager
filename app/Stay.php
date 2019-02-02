@@ -45,4 +45,9 @@ class Stay extends Model
     {
         $this->bill()->create($bill);
     }
+
+    public function room()
+    {
+    	return $this->belongsTo(Room::class);
+    }
 }

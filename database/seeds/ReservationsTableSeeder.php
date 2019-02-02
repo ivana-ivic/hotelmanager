@@ -16,6 +16,8 @@ class ReservationsTableSeeder extends Seeder
             $stay = factory(App\Stay::class)->make();
             $guest->stays()->save($stay);
             $reservation->stay()->save($stay);
+            $stay->room_id = $reservation->room_id;
+            $stay->save();
         });
     }
 }

@@ -70,7 +70,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('services.edit')->with('service', $service);
     }
 
     /**
@@ -82,7 +82,11 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $service->name = $request->name;
+        $service->price = $request->price;
+        $service->save();
+
+        return $this->index();
     }
 
     /**
@@ -93,6 +97,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        Service::destroy($service->id);
+        return $this->index();
     }
 }

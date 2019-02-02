@@ -27,10 +27,10 @@
 									<table class="table table-bordered">
 										<tbody>
 											@foreach ($bill->stay->services as $service)
-											<tr><th>Usluga</th><td>{{ $service->pivot->date }}</td></tr>
-											<tr><th>Cena</th><td>{{ $service->name }}</td></tr>
+											<tr><th>Usluga</th><td>{{ $service->name }}</td></tr>
+											<tr><th>Cena</th><td>{{ $service->price }}</td></tr>
 											<tr><th>Količina</th><td>{{ $service->pivot->quantity }}</td></tr>
-											<tr><th>Datum</th><td>{{ $service->price }}</td></tr>
+											<tr><th>Datum</th><td>{{ $service->pivot->date }}</td></tr>
 											@endforeach
 										</tbody>
 									</table>

@@ -29,6 +29,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="price" class="col-md-4 control-label">Cena</label>
+
+                            <div class="col-md-6">
+                                <input id="price" type="input" class="form-control" name="price" value="{{ $room->price }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="description" class="col-md-4 control-label">Opis</label>
 
                             <div class="col-md-6">
