@@ -11,10 +11,10 @@ class ServicesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('services')->insert([
+        /*DB::table('services')->insert([
             'name' => 'Smeštaj',
             'price' => '2400',
-        ]);
+        ]);*/
 
         DB::table('services')->insert([
             'name' => 'Boravišna taksa',
