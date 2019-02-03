@@ -17,7 +17,8 @@
 	
 								<div class="col-md-6">
 										<a href="/guests/create/0" class="button"><img style="width:26px;height:26px;" src="{{ asset('img/ic_person_add_black_18dp_2x.png') }}" alt="Dodaj gosta" /></a>
-										<select id="guest" class="form-control" name="guest" value="{{ $stay->guest->id }}" required>
+										
+										<select id="guest" class="form-control" name="guest" value=@if($stay->guest()->exists())"{{ $stay->guest->id }}"@else "" @endif required>
 										@if(count($guests) > 0)
 											@for($i = 0; $i < count($guests); $i++)
 												<option value="{{ $guests[$i]->id }}" @if ($stay->guest_id == $guests[$i]->id) selected="selected" @endif>{{ $guests[$i]->first_name }} {{ $guests[$i]->last_name }}</option>

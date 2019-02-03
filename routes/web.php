@@ -32,3 +32,5 @@ Route::get('/guests/create/{stay}', 'GuestController@create');
 
 Route::put('/stays/{stay}/checkout', 'StayController@checkOut')->name('stays.checkout');
 Route::get('bills/{bill}/email', 'BillController@email')->name('bills.email');
+
+Route::get('reservations/{reservation}/stay', 'ReservationController@storeStay')->name('reservations.stay');

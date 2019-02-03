@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Reservation;
 use App\Room;
+use App\Stay;
+use App\Guest;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -123,5 +126,19 @@ class ReservationController extends Controller
     {
         Reservation::destroy($reservation->id);
         return $this->index();
+    }
+
+    public function storeStay(Reservation $reservation)
+    {
+        $stay = Stay::create([
+            'memo' => $reservation->description,
+            'room_id' => $reservation->room->id,
+            'check_in_time' => now()
+        ]);
+        $reservation->stay()->save($stay);
+        $services = Service::all();
+        $guests = Guest::all();
+        $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
+        return view('stays.edit', compact('stay', 'services', 'guests', 'rooms'));
     }
 }

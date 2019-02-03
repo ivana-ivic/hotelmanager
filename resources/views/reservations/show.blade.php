@@ -24,6 +24,17 @@
                               <tr><th>Rezervaciju napravio</th><td>{{ $reservation->user->name }}</td></tr>
                               <tr><th>Važi do</th><td>{{ $reservation->valid_until }}</td></tr>
                               <tr><th>Status</th><td @if($reservation->status == 'V') style="color:#309e2a" @else style="color:#e01818" @endif>@if($reservation->status == 'V') Validna @else Otkazana @endif</td></tr>
+                              @if($reservation->stay()->exists())
+                              <tr><th>Boravak</th><td>
+                                <a href="{{ route('stays.show', $reservation->stay)}}">{{ $reservation->stay->check_in_time }} {{ $reservation->memo }}</a>
+                              </td></tr>
+                              @else
+                              <tr>
+                                <td>
+                                  <a href="{{route('reservations.stay', $reservation)}}">Prijavi boravak</a>
+                                </td>
+                              </tr>
+                              @endif
                             </tbody>
                           </table>
                     </div>
