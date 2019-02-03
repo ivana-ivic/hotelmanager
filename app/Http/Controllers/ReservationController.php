@@ -47,7 +47,8 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $reservation = app('new_reservation');
+        //$reservation = app('new_reservation');
+        $reservation = app()->make(Reservation::class);
         $reservation->description = $request->description;
         $reservation->arrival_date = $request->arrival_date;
         $reservation->departure_date = $request->departure_date;
