@@ -47,11 +47,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $reservation = new Reservation;
-        $reservation->created_at = now();
-        $reservation->updated_at = now();
-        $reservation->status = 'V';
-        $reservation->date = today();
+        $reservation = app('new_reservation');
         $reservation->description = $request->description;
         $reservation->arrival_date = $request->arrival_date;
         $reservation->departure_date = $request->departure_date;

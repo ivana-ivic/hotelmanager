@@ -54,7 +54,6 @@ class StayController extends Controller
     public function store(Request $request)
     {
         $attrs = request()->validate([
-            'check_in_time' => ['date_format:Y-m-d'],
             'memo' => ['string']
         ]);
 

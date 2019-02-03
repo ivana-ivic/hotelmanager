@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Reservation;
+
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +18,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        app()->bind('new_reservation', function(){
+            $reservation = new Reservation;
+            $reservation->created_at = now();
+            $reservation->updated_at = now();
+            $reservation->status = 'V';
+            $reservation->date = today();
+            return $reservation;
+        });
     }
 
     /**
@@ -28,5 +39,6 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() == 'local') {
             $this->app->register(\Reliese\Coders\CodersServiceProvider::class);
         }
+
     }
 }
