@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
+use Session;
 
 class ServiceController extends Controller
 {
@@ -18,7 +19,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::orderBy('name')->paginate(6);
 
         return view('services.index', compact('services'));
     }
@@ -48,6 +49,7 @@ class ServiceController extends Controller
 
         Service::create($attrs);
 
+        Session::flash('success', 'Usluga "' .$request->name. '" je uspešno kreirana!');
         return redirect('/services');
     }
 
@@ -86,6 +88,7 @@ class ServiceController extends Controller
         $service->price = $request->price;
         $service->save();
 
+        Session::flash('success', 'Usluga "' .$service->name. '" je uspešno izmenjena!');
         return $this->index();
     }
 
@@ -97,7 +100,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        Session::flash('success', 'Usluga "' .$service->name. '" je uspešno obrisana!');
         Service::destroy($service->id);
-        return $this->index();
+        return redirect()->route('services.index');
     }
 }

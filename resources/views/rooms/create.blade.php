@@ -47,7 +47,10 @@
                             <label for="active" class="col-md-4 control-label">Aktivna?</label>
 
                             <div class="col-md-6">
-                                <input id="active" type="checkbox" class="form-control" name="active">
+                                <select id="active" class="form-control" name="active" value="{{ old('active') }}" required>
+                                    <option value="1">Da</option>
+                                    <option value="0">Ne</option>
+                                </select>
                             </div>
                         </div>
 

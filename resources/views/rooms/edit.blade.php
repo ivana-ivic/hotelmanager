@@ -48,7 +48,10 @@
                             <label for="active" class="col-md-4 control-label">Aktivna?</label>
 
                             <div class="col-md-6">
-                                <input id="active" type="checkbox" class="form-control" name="active" @if($room->active) checked @endif >
+                                <select id="active" class="form-control" name="active" value="{{  $room->active }}" required>
+                                    <option value="1" @if ($room->active == 1) selected="selected" @endif>Da</option>
+                                    <option value="0" @if ($room->active == 0) selected="selected" @endif>Ne</option>
+                                </select>
                             </div>
                         </div>
 

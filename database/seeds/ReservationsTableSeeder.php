@@ -11,7 +11,7 @@ class ReservationsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Reservation::class, 3)->create()->each(function ($reservation) {
+        factory(App\Reservation::class, 12)->create()->each(function ($reservation) {
             $guest = factory(App\Guest::class)->create();
             $stay = factory(App\Stay::class)->make();
             $guest->stays()->save($stay);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Guest;
 use Illuminate\Http\Request;
+use Session;
 
 class GuestController extends Controller
 {
@@ -18,7 +19,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = Guest::all();
+        $guests = Guest::paginate(6);
 
         return view('guests.index', compact('guests'));
     }
@@ -55,6 +56,7 @@ class GuestController extends Controller
         }
         Guest::create($attrs);
 
+        Session::flash('success', 'Gost ' .$request->first_name. ' ' .$request->last_name. ' je uspešno kreiran!');
         if ($stay > 0)
         {
             return redirect('/stays/$stay/edit');
@@ -107,6 +109,7 @@ class GuestController extends Controller
         $guest->identification_doc = $request->identification_doc;
         $guest->save();
 
+        Session::flash('success', 'Gost ' .$guest->first_name. ' ' .$guest->last_name. ' je uspešno izmenjen!');
         return $this->index();
     }
 
@@ -118,7 +121,8 @@ class GuestController extends Controller
      */
     public function destroy(Guest $guest)
     {
+        Session::flash('success', 'Gost ' .$guest->first_name. ' ' .$guest->last_name. ' je uspešno obrisan!');
         Guest::destroy($guest->id);
-        return $this->index();
+        return redirect()->route('guests.index');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Room;
+use Session;
 
 class RoomController extends Controller
 {
@@ -18,7 +19,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::orderBy('type')->orderBy('number')->paginate(6);
         return view('rooms.index')->with('rooms', $rooms);
     }
 
@@ -48,6 +49,7 @@ class RoomController extends Controller
         $room->active = $request->active ? true : false;
         $room->save();
 
+        Session::flash('success', 'Soba '.$room->number.' je uspešno kreirana!');
         return $this->index();
     }
 
@@ -90,6 +92,7 @@ class RoomController extends Controller
         $room->active = $request->active ? true : false;
         $room->save();
 
+        Session::flash('success', 'Soba ' .$room->number. ' je uspešno izmenjena!');
         return $this->show($room);
     }
 
@@ -102,6 +105,7 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         Room::destroy($room->id);
-        return $this->index();
+        Session::flash('success', 'Soba '.$room->number.' je uspešno obrisana!');
+        return redirect()->route('rooms.index');
     }
 }

@@ -80,8 +80,9 @@
             @endif
 
             <div class="content">
+                <img style="width:170px;height:170px;" src="{{ asset('img/logo.png') }}" />
                 <div class="title m-b-md">
-                    {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Laravel') }}
                 </div>
 
                 <!--<div class="links">

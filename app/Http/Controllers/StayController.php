@@ -9,6 +9,7 @@ use App\Room;
 use App\Bill;
 use Illuminate\Http\Request;
 use DateTime;
+use Session;
 
 class StayController extends Controller
 {
@@ -25,7 +26,7 @@ class StayController extends Controller
      */
     public function index()
     {
-        $stays = Stay::all();
+        $stays = Stay::orderBy('check_in_time', 'desc')->paginate(6);
 
         return view('stays.index', compact('stays'));
     }
@@ -40,6 +41,7 @@ class StayController extends Controller
         $services = Service::all();
         $guests = Guest::all();
         $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
+        
         return view('stays.create', compact('services', 'guests', 'rooms'));    
     }
 
@@ -68,6 +70,7 @@ class StayController extends Controller
             $stay->addServices($services);   
         }
 
+        Session::flash('success', 'Boravak ' .$stay->id. ' je uspešno kreiran!');
         return redirect('/stays');
     }
 
@@ -117,6 +120,7 @@ class StayController extends Controller
             $stay->updateServices($services);   
         }
 
+        Session::flash('success', 'Boravak ' .$stay->id. ' je uspešno izmenjen!');
         return $this->show($stay);
     }
 
@@ -128,13 +132,14 @@ class StayController extends Controller
      */
     public function destroy(Stay $stay)
     {
+        Session::flash('success', 'Boravak ' .$stay->id. ' je uspešno obrisan!');
         $bill=Bill::where('stay_id', $stay->id)->get();
         if ($bill->isNotEmpty())
         {
             Bill::destroy($bill->id);
         }
         Stay::destroy($stay->id);
-        return $this->index();
+        return redirect()->route('stays.index');
     }
 
     public function storeService(Stay $stay)
@@ -149,6 +154,7 @@ class StayController extends Controller
         //  'project_id' => $project->id,
         //  'description' => request('description')
         // ]);
+        Session::flash('success', 'Usluga "' .$request->name. '" je uspešno dodata boravku ' .$stay->id. '!');
         return back();
     }
 
@@ -172,6 +178,7 @@ class StayController extends Controller
         $bill = ['amount' => $total];
         $stay->addBill($bill);
         
+        Session::flash('success', 'Kreiran je račun za boravak ' .$stay->id. '!');
         return view('bills.show')->with('bill', $stay->bill);
     }
 
@@ -179,6 +186,7 @@ class StayController extends Controller
     {
         $stay->check_out_time = now();
         $stay->save();
+        Session::flash('success', 'Gost je uspešno odjavljen!');
         return $this->show($stay);
     }
 }

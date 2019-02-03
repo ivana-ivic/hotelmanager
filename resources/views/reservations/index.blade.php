@@ -15,7 +15,7 @@
                             <tbody>
                                 <tr><th>Broj rezervacije</th><th>Soba</th><th>Dolazak</th><th>Status</th><th></th></tr>
                                 @for($i = 0; $i < count($reservations); $i++)
-                                    <tr @if($reservations[$i]->status == 'V') style="background-color:#8cff8e" @else style="background-color:#ff7a7a" @endif>
+                                    <tr @if($reservations[$i]->status == 'V') style="color:#03c100" @else style="color:red" @endif>
                                         <td><a href="{{ URL::route('reservations.show', $reservations[$i]) }}">{{ $reservations[$i]->id }}</a></td>
                                         <td>{{ $reservations[$i]->room->number }}</td>
                                         <td>{{ $reservations[$i]->arrival_date }}</td>
@@ -31,6 +31,7 @@
                                 @endfor
                             </tbody>
                             </table>
+                            {{ $reservations->links() }}
                         </div>
                     @else
                         <p>Nema soba</p>

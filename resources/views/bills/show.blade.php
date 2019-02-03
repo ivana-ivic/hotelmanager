@@ -26,11 +26,12 @@
 									@if(count($bill->stay->services) > 0)
 									<table class="table table-bordered">
 										<tbody>
+											<tr><th>Usluga</th><th>Cena</th><th>Količina</th><th>Datum</th></tr>
 											@foreach ($bill->stay->services as $service)
-											<tr><th>Usluga</th><td>{{ $service->name }}</td></tr>
-											<tr><th>Cena</th><td>{{ $service->price }}</td></tr>
-											<tr><th>Količina</th><td>{{ $service->pivot->quantity }}</td></tr>
-											<tr><th>Datum</th><td>{{ $service->pivot->date }}</td></tr>
+											<tr><td>{{ $service->name }}</td>
+											<td>{{ $service->price }}</td>
+											<td>{{ $service->pivot->quantity }}</td>
+											<td>{{ $service->pivot->date }}</td></tr>
 											@endforeach
 										</tbody>
 									</table>
