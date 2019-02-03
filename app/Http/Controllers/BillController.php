@@ -6,6 +6,7 @@ use App\Bill;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Illuminate\Http\Request;
+use Session;
 
 class BillController extends Controller
 {
@@ -20,8 +21,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::all();
-
+        $bills = Bill::orderBy('created_at', 'desc')->paginate(6);
         return view('bills.index', compact('bills'));
     }
 
@@ -50,6 +50,7 @@ class BillController extends Controller
 
         Bill::create($attrs);
 
+        Session::flash('success', 'Račun za boravak ' .$request->stay_id. ' je uspešno kreiran!');
         return redirect('/bills');
     }
 
@@ -96,7 +97,8 @@ class BillController extends Controller
     public function destroy(Bill $bill)
     {
         Bill::destroy($bill->id);
-        return $this->index();
+        Session::flash('success', 'Račun ' .$bill->id. ' je uspešno obrisan!');
+        return redirect()->route('bills.index');
     }
 
 
@@ -107,6 +109,7 @@ class BillController extends Controller
         $subject = 'Hotel bill';
         Mail::to($guestmail)->send(new SendMail($bill, $subject));
 
+        Session::flash('success', 'Račun ' .$bill->id. ' je uspešno poslat na '.guestmail.'!');
         return back();
     }
 }

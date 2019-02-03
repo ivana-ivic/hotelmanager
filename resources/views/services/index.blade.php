@@ -29,7 +29,8 @@
 								</tr>
 							@endforeach
                             </tbody>
-                          </table>
+						  </table>
+						  {{ $services->links() }}
                     </div>
                 </div>
             </div>

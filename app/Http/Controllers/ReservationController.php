@@ -9,6 +9,7 @@ use App\Guest;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class ReservationController extends Controller
 {
@@ -23,7 +24,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::orderBy('arrival_date', 'desc')->paginate(6);
         return view('reservations.index')->with('reservations', $reservations);
     }
 
@@ -46,7 +47,6 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //OVDE IDE PROVERA DA LI JE SOBA SLOBODNA
         $reservation = new Reservation;
         $reservation->created_at = now();
         $reservation->updated_at = now();
@@ -63,6 +63,7 @@ class ReservationController extends Controller
 
         $reservation->save();
 
+        Session::flash('success', 'Rezervacija ' .$reservation->id. ' je uspešno kreirana!');
         return $this->index();
     }
 
@@ -99,7 +100,6 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //OVDE IDE PROVERA DA LI JE SOBA SLOBODNA
         $reservation->updated_at = now();
         $reservation->status = $request->status;
         $reservation->description = $request->description;
@@ -113,6 +113,7 @@ class ReservationController extends Controller
 
         $reservation->save();
 
+        Session::flash('success', 'Rezervacija ' .$reservation->id. ' je uspešno izmenjena!');
         return $this->show($reservation);
     }
 
@@ -124,8 +125,9 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
+        Session::flash('success', 'Rezervacija ' .$reservation->id. ' je uspešno obrisana!');
         Reservation::destroy($reservation->id);
-        return $this->index();
+        return redirect()->route('reservations.index');
     }
 
     public function storeStay(Reservation $reservation)

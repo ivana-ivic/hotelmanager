@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('stays.index') }}">
-                    {{ config('app.name', 'Laravel') }}
+                        <img style="width:50px;height:50px;" src="{{ asset('img/logo.png') }}" />{{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -92,6 +92,11 @@
         </nav>
 
         <main class="py-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                @include('partials._messages')
+                </div>
+            </div>
             @yield('content')
         </main>
     </div>

@@ -11,7 +11,7 @@
 							<div class="panel-body">
 								<table class="table">
 									<tbody>
-										<tr><th>Ime i prezime</th><th>Datum rođenja</th><th>Zemlja</th><th>Broj dokumenta</th><th></th></tr>
+										<tr><th>Ime i prezime</th><th>Datum rođenja</th><th>Zemlja</th><th>E-mail</th><th>Broj dokumenta</th><th></th></tr>
 										@foreach ($guests as $guest)  
 										<tr><td><a href="{{ URL::route('guests.edit', $guest) }}" style="float:left;" title="Izmeni gosta">{{ $guest->first_name }} {{ $guest->last_name }}</a></td>
 									  	<td>{{ $guest->date_of_birth }}</td>
@@ -28,6 +28,7 @@
 										@endforeach  
 									</tbody>
 								  </table>
+								  {{ $guests->links() }}
 							</div>
 						</div>
 					</div>

@@ -21,6 +21,7 @@
                                 @endforeach
                             </tbody>
                             </table>
+                            {{ $bills->links() }}
                         </div>
                     @else
                     <p style="color:#a0a0a0; font-style: italic;">Nema računa</p>

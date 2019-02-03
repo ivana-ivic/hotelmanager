@@ -23,6 +23,7 @@
                                 @endfor
                             </tbody>
                             </table>
+                            {{ $rooms->links() }}
                         </div>
                     @else
                         <p>Nema soba</p>
