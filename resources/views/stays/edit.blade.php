@@ -8,7 +8,7 @@
                 <div class="card-header">Izmena boravaka</div>
 
                 <div class="card-body">
-					<form class="form-horizontal" method="POST" action="{{ route('stays.update', $stay) }}">
+					<form id="stay-form" class="form-horizontal" method="POST" action="{{ route('stays.update', $stay) }}">
 						{{ method_field('PUT') }}
 						{{ csrf_field() }}
 
@@ -70,8 +70,22 @@
 
 						<div>
 							<ul id="list-chosen">
+								@if(!$stay->services->isEmpty())
+									@foreach($stay->services as $service)
+										<li>
+											{{$service->name}}
+											{{-- <input type="checkbox" name="services[]" value="{{$service->id}}" checked hidden> --}}
+											<input type="hidden" name="service" value="{{$service->id}}">
+											<input type="number" name='quantity' value="{{$service->pivot->quantity}}">
+											<input type="hidden" name="pivot_id" value="{{$service->pivot->id}}">
+											<input type="button" value="Izbrisi" onclick="removeFromList(this)">
+										</li>
+									@endforeach
+								@endif
 							</ul>
 						</div>
+
+						<input type="hidden" id='services-hidden' name="services-list" value=''>
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">

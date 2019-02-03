@@ -51,7 +51,6 @@ class StayController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(request()->all());
         $attrs = request()->validate([
             'check_in_time' => ['date_format:Y-m-d'],
             'memo' => ['string']
@@ -62,9 +61,10 @@ class StayController extends Controller
         $stay->room_id = $request->room;
         $stay->guest_id = $request->guest;
         $stay->save();
-        $services = request('services');
-        if (isset($services))
+        $services_list = request('services-list');
+        if (isset($services_list))
         {
+            $services = json_decode($services_list, true);
             $stay->addServices($services);   
         }
 
@@ -105,15 +105,17 @@ class StayController extends Controller
      */
     public function update(Request $request, Stay $stay)
     {
+        //dd($request);
         $stay->room_id = $request->room;
         $stay->guest_id = $request->guest;
         $stay->memo = $request->memo;
         $stay->save();
-        /*$services = request('services');
-        if (isset($services))
+        $services_list = request('services-list');
+        if (isset($services_list))
         {
-            $stay->addServices($services);   
-        }*/
+            $services = json_decode($services_list, true);
+            $stay->updateServices($services);   
+        }
 
         return $this->show($stay);
     }
@@ -127,7 +129,10 @@ class StayController extends Controller
     public function destroy(Stay $stay)
     {
         $bill=Bill::where('stay_id', $stay->id)->get();
-        Bill::destroy($bill->id);
+        if ($bill->isNotEmpty())
+        {
+            Bill::destroy($bill->id);
+        }
         Stay::destroy($stay->id);
         return $this->index();
     }
@@ -157,8 +162,10 @@ class StayController extends Controller
             $total += $service->price * $service->pivot->quantity;       
         }
 
-        $datetime1 = new DateTime($stay->reservation->arrival_date);
-        $datetime2 = new DateTime($stay->reservation->departure_date);
+        // $datetime1 = new DateTime($stay->reservation->arrival_date);
+        // $datetime2 = new DateTime($stay->reservation->departure_date);
+        $datetime1 = new DateTime($stay->check_in_time);
+        $datetime2 = new DateTime($stay->check_out_time);
         $numOfDays = $datetime1->diff($datetime2);
 
         $total += $stay->room->price * $numOfDays->d;

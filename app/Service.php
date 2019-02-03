@@ -10,6 +10,6 @@ class Service extends Model
 	
     public function stays()
     {
-    	return $this->belongsToMany(Stay::class)->withPivot('date', 'quantity');
+    	return $this->belongsToMany(Stay::class)->withPivot('id', 'date', 'quantity');
     }
 }

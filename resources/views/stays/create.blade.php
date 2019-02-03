@@ -8,41 +8,41 @@
                 <div class="card-header">Novi boravak</div>
 
                 <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="/stays">
+                    <form id="stay-form" class="form-horizontal" method="POST" action="/stays">
                         {{ csrf_field() }}
 
 						<div class="form-group">
-								<label for="guest" class="col-md-4 control-label">Gost</label>
-	
-								<div class="col-md-6">
-										<a href="/guests/create/0" class="button"><img style="width:26px;height:26px;" src="{{ asset('img/ic_person_add_black_18dp_2x.png') }}" alt="Dodaj gosta" /></a>
-									<select id="guest" class="form-control" name="guest" value="{{ old('guest') }}" required>
-										@if(count($guests) > 0)
-											@for($i = 0; $i < count($guests); $i++)
-												<option value="{{ $guests[$i]->id }}">{{ $guests[$i]->first_name }} {{ $guests[$i]->last_name }}</option>
-											@endfor
-										@else
-											<p>Nema slobodnih soba</p>
-										@endif
-									</select>
-								</div>
+							<label for="guest" class="col-md-4 control-label">Gost</label>
+
+							<div class="col-md-6">
+									<a href="/guests/create/0" class="button"><img style="width:26px;height:26px;" src="{{ asset('img/ic_person_add_black_18dp_2x.png') }}" alt="Dodaj gosta" /></a>
+								<select id="guest" class="form-control" name="guest" value="{{ old('guest') }}" required>
+									@if(count($guests) > 0)
+										@for($i = 0; $i < count($guests); $i++)
+											<option value="{{ $guests[$i]->id }}">{{ $guests[$i]->first_name }} {{ $guests[$i]->last_name }}</option>
+										@endfor
+									@else
+										<p>Nema slobodnih soba</p>
+									@endif
+								</select>
 							</div>
+						</div>
 
 						<div class="form-group">
-								<label for="room" class="col-md-4 control-label">Soba</label>
-	
-								<div class="col-md-6">
-									<select id="room" class="form-control" name="room" value="{{ old('room') }}" required>
-										@if(count($rooms) > 0)
-											@for($i = 0; $i < count($rooms); $i++)
-												<option value="{{ $rooms[$i]->id }}">{{ $rooms[$i]->number }}</option>
-											@endfor
-										@else
-											<p>Nema slobodnih soba</p>
-										@endif
-									</select>
-								</div>
+							<label for="room" class="col-md-4 control-label">Soba</label>
+
+							<div class="col-md-6">
+								<select id="room" class="form-control" name="room" value="{{ old('room') }}" required>
+									@if(count($rooms) > 0)
+										@for($i = 0; $i < count($rooms); $i++)
+											<option value="{{ $rooms[$i]->id }}">{{ $rooms[$i]->number }}</option>
+										@endfor
+									@else
+										<p>Nema slobodnih soba</p>
+									@endif
+								</select>
 							</div>
+						</div>
 
                         <div class="form-group">
 							<label for="memo" class="col-md-4 control-label">Opis</label>
@@ -71,6 +71,8 @@
 							<ul id="list-chosen">
 							</ul>
 						</div>
+
+						<input type="hidden" id='services-hidden' name="services-list" value=''>
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
