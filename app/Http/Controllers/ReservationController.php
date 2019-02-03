@@ -45,9 +45,8 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Reservation $reservation)
     {
-        $reservation = app()->make(Reservation::class);
         $reservation->description = $request->description;
         $reservation->arrival_date = $request->arrival_date;
         $reservation->departure_date = $request->departure_date;
@@ -72,6 +71,7 @@ class ReservationController extends Controller
     public function show(Reservation $reservation)
     {
         //$reservation = Reservation::find($reservation->id);
+        dd($reservation->id);
         return view('reservations.show')->with('reservation', $reservation);
     }
 
@@ -83,6 +83,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
+        dd($reservation->id);
         $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
         return view('reservations.edit', ['reservation' => $reservation, 'rooms' => $rooms]);
     }
