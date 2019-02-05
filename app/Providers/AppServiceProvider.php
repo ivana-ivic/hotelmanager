@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        app()->bind('new_reservation', function(){
+        app()->bind(Reservation::class, function(){
             $reservation = new Reservation;
             $reservation->created_at = now();
             $reservation->updated_at = now();
