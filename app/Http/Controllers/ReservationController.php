@@ -45,20 +45,20 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Reservation $reservation)
+    public function store(Request $request, Reservation $newreservation)
     {
-        $reservation->description = $request->description;
-        $reservation->arrival_date = $request->arrival_date;
-        $reservation->departure_date = $request->departure_date;
-        $reservation->valid_until = $request->valid_until;
-        $reservation->room_id = $request->room;
+        $newreservation->description = $request->description;
+        $newreservation->arrival_date = $request->arrival_date;
+        $newreservation->departure_date = $request->departure_date;
+        $newreservation->valid_until = $request->valid_until;
+        $newreservation->room_id = $request->room;
 
         $user_id = Auth::id();
-        $reservation->user_id = $user_id;
+        $newreservation->user_id = $user_id;
 
-        $reservation->save();
+        $newreservation->save();
 
-        Session::flash('success', 'Rezervacija ' .$reservation->id. ' je uspešno kreirana!');
+        Session::flash('success', 'Rezervacija ' .$newreservation->id. ' je uspešno kreirana!');
         return $this->index();
     }
 
@@ -70,8 +70,6 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //$reservation = Reservation::find($reservation->id);
-        dd($reservation->id);
         return view('reservations.show')->with('reservation', $reservation);
     }
 
@@ -83,7 +81,6 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        dd($reservation->id);
         $rooms=Room::where('active', 1)->orderBy('number', 'asc')->get();
         return view('reservations.edit', ['reservation' => $reservation, 'rooms' => $rooms]);
     }
