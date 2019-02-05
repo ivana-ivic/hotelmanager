@@ -12,7 +12,7 @@ $factory->define(App\Reservation::class, function (Faker $faker) {
         'arrival_date' => $start,
         'departure_date' => $end,
         'valid_until' => $start,
-        'room_id' => rand (1, 4),
+        'room_id' => rand (1, 13),
         'user_id' => 1,
     ];
 });
