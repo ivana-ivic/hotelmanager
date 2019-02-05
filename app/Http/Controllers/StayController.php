@@ -173,6 +173,8 @@ class StayController extends Controller
         $datetime2 = new DateTime($stay->check_out_time);
         $numOfDays = $datetime1->diff($datetime2);
 
+        if($numOfDays->d == 0)
+            $numOfDays->d = 1;
         $total += $stay->room->price * $numOfDays->d;
         $bill = ['amount' => $total];
         $stay->addBill($bill);

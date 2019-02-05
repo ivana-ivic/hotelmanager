@@ -110,6 +110,6 @@ class BillController extends Controller
         Mail::to($guestmail)->send(new SendMail($bill, $subject));
 
         Session::flash('success', 'Račun ' .$bill->id. ' je uspešno poslat na '.$guestmail.'!');
-        return back();
+        return $this->show($bill);
     }
 }

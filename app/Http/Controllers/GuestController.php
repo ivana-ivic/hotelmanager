@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Guest;
+use App\Stay;
+use App\Bill;
 use Illuminate\Http\Request;
 use Session;
 
@@ -122,6 +124,16 @@ class GuestController extends Controller
     public function destroy(Guest $guest)
     {
         Session::flash('success', 'Gost ' .$guest->first_name. ' ' .$guest->last_name. ' je uspešno obrisan!');
+        $stays=Stay::where('guest_id', $guest->id)->get();
+        foreach($stays as $stay)
+        {
+            $bills=Bill::where('stay_id', $stay->id)->get();
+            foreach($bills as $bill)
+            {
+                Bill::destroy($bill->id);
+            }
+            Stay::destroy($stay->id);
+        }
         Guest::destroy($guest->id);
         return redirect()->route('guests.index');
     }

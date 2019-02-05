@@ -91,10 +91,11 @@
             </div>
         </nav>
 
+        
         <main class="py-4">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                @include('partials._messages')
+                    @include('partials._messages')
                 </div>
             </div>
             @yield('content')

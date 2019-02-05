@@ -25,7 +25,7 @@ class ReservationIndexArrivalDate extends Migration
      */
     public function down()
     {
-        Schema::table('guests', function (Blueprint $table) {
+        Schema::table('reservations', function (Blueprint $table) {
             $table->dropIndex('arrival_date');
         });
     }

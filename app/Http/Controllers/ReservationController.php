@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reservation;
 use App\Room;
 use App\Stay;
+use App\Bill;
 use App\Guest;
 use App\Service;
 use Illuminate\Http\Request;
@@ -120,6 +121,16 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         Session::flash('success', 'Rezervacija ' .$reservation->id. ' je uspešno obrisana!');
+        $stays=Stay::where('reservation_id', $reservation->id)->get();
+        foreach($stays as $stay)
+        {
+            $bills=Bill::where('stay_id', $stay->id)->get();
+            foreach($bills as $bill)
+            {
+                Bill::destroy($bill->id);
+            }
+            Stay::destroy($stay->id);
+        }
         Reservation::destroy($reservation->id);
         return redirect()->route('reservations.index');
     }
