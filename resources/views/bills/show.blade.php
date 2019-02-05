@@ -23,7 +23,7 @@
 								</div>
 								<div class="form-group">
 									<h5>Usluge: </h5>
-									@if(count($bill->services) > 0)
+									@if(count($bill->stay->services) > 0)
 									<table class="table table-bordered">
 										<tbody>
 											<tr><th>Usluga</th><th>Cena</th><th>Količina</th><th>Datum</th></tr>
